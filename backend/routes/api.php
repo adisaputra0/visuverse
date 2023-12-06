@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\CommentController;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+//Authentication
+Route::post("auth/register", [AuthController::class, "register"]);
+Route::post("auth/login", [AuthController::class, "login"]);
+Route::post("auth/logout", [AuthController::class, "logout"])->middleware("auth:sanctum");
+
+//Photo
+//Guest or users
+Route::get("photos", [PhotoController::class, "index"]);
+Route::get("photos/{slug}", [PhotoController::class, "detail"]);
+//Users
+Route::get("user/photos", [PhotoController::class, "user_photos"])->middleware("auth:sanctum");
+Route::get("user/photos/{slug}", [PhotoController::class, "user_photos_detail"])->middleware("auth:sanctum");
+Route::post("user/photos", [PhotoController::class, "store"])->middleware("auth:sanctum");
+Route::post("user/photos/{id}", [PhotoController::class, "update"])->middleware("auth:sanctum");
+Route::delete("user/photos/{id}", [PhotoController::class, "destroy"])->middleware("auth:sanctum");
+
+//Comments
+Route::post("photos/{slug}/comments", [CommentController::class, "store"])->middleware("auth:sanctum");
+Route::get("photos/{slug}/comments/{comment_id}", [CommentController::class, "detail"])->middleware("auth:sanctum");
+Route::post("photos/{slug}/comments/{comment_id}", [CommentController::class, "update"])->middleware("auth:sanctum");
+Route::delete("photos/{slug}/comments/{comment_id}", [CommentController::class, "destroy"])->middleware("auth:sanctum");
+
+//Likes
