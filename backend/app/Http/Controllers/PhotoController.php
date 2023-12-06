@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Photo;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -25,10 +26,12 @@ class PhotoController extends Controller
             ], 404);
         }
         $comments = Comment::where("photo_id", $photo->id)->get();
+        $photo->categories_id = explode(",", $photo->categories_id);
         return response()->json([
             "message" => "Success get detail photos",
             "photos" => $photo,
             "comments" => $comments,
+            "total_likes" => count(Like::where("photo_id", $photo->id)->get()),
             "total_comment" => count($comments),
         ]);
     }
@@ -52,16 +55,19 @@ class PhotoController extends Controller
                 "message" => "Forbidden access",
             ], 401);
         }
+        $photo->categories_id = explode(",", $photo->categories_id);
         return response()->json([
             "message" => "Success get detail photos",
             "photos" => $photo,
+            "total_likes" => count(Like::where("photo_id", $photo->id)->get()),
         ]);
     }
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             "title" => "required",
             "image" => "required|image|mimes:jpeg,png,jpg,gif",
-            "description" => "required"
+            "description" => "required",
+            "categories_id" => "required",
         ]);
         if($validator->fails()){
             return response()->json([
@@ -87,7 +93,8 @@ class PhotoController extends Controller
         $validator = Validator::make($request->all(), [
             "title" => "required",
             "image" => "image|mimes:jpeg,png,jpg,gif",
-            "description" => "required"
+            "description" => "required",
+            "categories_id" => "required",
         ]);
         if($validator->fails()){
             return response()->json([

@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,11 @@ Route::post("auth/register", [AuthController::class, "register"]);
 Route::post("auth/login", [AuthController::class, "login"]);
 Route::post("auth/logout", [AuthController::class, "logout"])->middleware("auth:sanctum");
 
+//Categories
+Route::get("category/{category_name}", [CategoryController::class, "index"]);
+Route::post("category", [CategoryController::class, "store"])->middleware("auth:sanctum");
+Route::delete("category/{category_name}", [CategoryController::class, "destroy"])->middleware("auth:sanctum");
+
 //Photo
 //Guest or users
 Route::get("photos", [PhotoController::class, "index"]);
@@ -44,3 +51,5 @@ Route::post("photos/{slug}/comments/{comment_id}", [CommentController::class, "u
 Route::delete("photos/{slug}/comments/{comment_id}", [CommentController::class, "destroy"])->middleware("auth:sanctum");
 
 //Likes
+Route::post("photos/{slug}/like", [LikeController::class, "store"])->middleware("auth:sanctum");
+Route::delete("photos/{slug}/like", [LikeController::class, "destroy"])->middleware("auth:sanctum");
