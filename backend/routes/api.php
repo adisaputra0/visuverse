@@ -30,6 +30,7 @@ Route::post("auth/logout", [AuthController::class, "logout"])->middleware("auth:
 
 //Categories
 Route::get("category/{category_name}", [CategoryController::class, "index"]);
+Route::get("category", [CategoryController::class, "all_categories"]);
 Route::post("category", [CategoryController::class, "store"])->middleware("auth:sanctum");
 Route::delete("category/{category_name}", [CategoryController::class, "destroy"])->middleware("auth:sanctum");
 

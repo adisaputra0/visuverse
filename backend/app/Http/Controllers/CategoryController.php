@@ -17,13 +17,37 @@ class CategoryController extends Controller
             ], 404);
         }
         $photos = [];
+        $categories = [];
         foreach(Photo::where("categories_id", $category->id)->get() as $photo){
             $photos[] = $photo;
+            
+            $category_photo = explode(",", $photo->categories_id);
+            foreach($category_photo as $item_category){
+                $category = Category::find($item_category);
+                $categories[] = $category->category_name;
+            }
+            $photo->category_name = $categories;
+            $categories = [];
         }
         return response()->json([
             "message" => "Success get category",
             "category" => $category,
             "photos" => $photos,
+        ]);
+    }
+    public function all_categories(){
+        $categories = Category::orderBy("id", "DESC")->get();
+        foreach($categories as $category){
+            $photo = Photo::orderBy("created_at", "DESC")->where("categories_id", $category->id)->first();
+            if($photo){
+                $category->thumbnail = $photo->name_image;
+            }else{
+                $category->thumbnail = null;
+            }
+        }
+        return response()->json([
+            "message" => "Success get all categories",
+            "category" => $categories,
         ]);
     }
     public function store(Request $request){

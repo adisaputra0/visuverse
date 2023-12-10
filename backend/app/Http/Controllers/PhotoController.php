@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Like;
 use App\Models\Photo;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -13,9 +14,23 @@ class PhotoController extends Controller
 {
     //Guest or users
     public function index(){
+        
+        //Get categories name
+        $all_photos = Photo::all();
+        $categories = [];
+        foreach($all_photos as $item_photo){
+            $category_photo = explode(",", $item_photo->categories_id);
+            foreach($category_photo as $item_category){
+                $category = Category::find($item_category);
+                $categories[] = $category->category_name;
+            }
+            $item_photo->category_name = $categories;
+            $categories = [];
+        }
+
         return response()->json([
             "message" => "Success get photos",
-            "photos" => Photo::all(),
+            "photos" => $all_photos,
         ]);
     }
     public function detail($slug){
@@ -26,7 +41,16 @@ class PhotoController extends Controller
             ], 404);
         }
         $comments = Comment::where("photo_id", $photo->id)->get();
-        $photo->categories_id = explode(",", $photo->categories_id);
+
+        //Get categories name
+        $categories = [];
+        $category_photo = explode(",", $photo->categories_id);
+        foreach($category_photo as $item_category){
+            $category = Category::find($item_category);
+            $categories[] = $category->category_name;
+        }
+        $photo->category_name = $categories;
+
         return response()->json([
             "message" => "Success get detail photos",
             "photos" => $photo,
@@ -38,9 +62,21 @@ class PhotoController extends Controller
 
     //Users
     public function user_photos(){
+        //Get categories name
+        $all_photos = Photo::where("user_id", auth()->user()->id)->get();
+        $categories = [];
+        foreach($all_photos as $item_photo){
+            $category_photo = explode(",", $item_photo->categories_id);
+            foreach($category_photo as $item_category){
+                $category = Category::find($item_category);
+                $categories[] = $category->category_name;
+            }
+            $item_photo->category_name = $categories;
+        }
+
         return response()->json([
             "message" => "Success get photos user",
-            "photos" => Photo::where("user_id", auth()->user()->id)->get(),
+            "photos" => $all_photos,
         ]);
     }
     public function user_photos_detail($slug){
@@ -55,11 +91,19 @@ class PhotoController extends Controller
                 "message" => "Forbidden access",
             ], 401);
         }
-        $photo->categories_id = explode(",", $photo->categories_id);
+
+        //Get categories name
+        $category_photo = explode(",", $photo->categories_id);
+        foreach($category_photo as $item_category){
+            $category = Category::find($item_category);
+            $categories[] = $category->category_name;
+        }
+        $photo->category_name = $categories;
+        $photo->total_likes = count(Like::where("photo_id", $photo->id)->get());
+
         return response()->json([
             "message" => "Success get detail photos",
             "photos" => $photo,
-            "total_likes" => count(Like::where("photo_id", $photo->id)->get()),
         ]);
     }
     public function store(Request $request){
@@ -143,6 +187,19 @@ class PhotoController extends Controller
             return response()->json([
                 "message" => "Forbidden access",
             ], 401);
+        }
+
+        $comments = Comment::where("photo_id", $photo->id)->get();
+        $likes = Like::where("photo_id", $photo->id)->get();
+        if($comments){
+            foreach ($comments as $comment) {
+                $comment->delete();
+            }
+        }
+        if($likes){
+            foreach ($likes as $like) {
+                $like->delete();
+            }
         }
 
         $photo->delete();
