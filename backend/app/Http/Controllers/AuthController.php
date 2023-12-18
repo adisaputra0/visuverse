@@ -17,13 +17,13 @@ class AuthController extends Controller
         ]);
         if($validator->fails()){
             return response()->json([
-                "message" => "Invalid Field",
+                "message" => "Invalid field",
                 "errors" => $validator->errors(),
             ], 403);
         }
         User::create($request->all());
         return response()->json([
-            "message" => "Register Success"
+            "message" => "Register success"
         ], 201);
     }
     public function login(Request $request){
@@ -33,14 +33,14 @@ class AuthController extends Controller
         ]);
         if($validator->fails()){
             return response()->json([
-                "message" => "Invalid Field",
+                "message" => "Invalid field",
                 "errors" => $validator->errors(),
             ], 403);
         }
         if(Auth::attempt($request->all())){
             $user = User::where("username", $request->username)->first();
             return response()->json([
-                "message" => "Login Success",
+                "message" => "Login success",
                 "token" => $user->createToken("auth_token")->plainTextToken,
                 "user" => $user,
             ]);
@@ -53,7 +53,13 @@ class AuthController extends Controller
         $user = User::where("username", auth()->user()->username)->first();
         $user->tokens()->delete();
         return response()->json([
-            "message" => "Logout Success",
+            "message" => "Logout success",
+        ]);
+    }
+    public function profile(){
+        return response()->json([
+            "message" => "Get profile success",
+            "user" => auth()->user(),
         ]);
     }
 }

@@ -60,6 +60,30 @@ class PhotoController extends Controller
         ]);
     }
 
+    public function download($slug)
+    {
+        $photo = Photo::where("slug", $slug)->first();
+        if (!$photo) {
+            return response()->json([
+                "message" => "Photo not found",
+            ], 404);
+        }
+    
+        $path = public_path("photos/") . $photo->name_image;
+    
+        if (!file_exists($path)) {
+            return response()->json([
+                "message" => "Photo not found",
+            ], 404);
+        }
+    
+        $fileName = $photo->name_image;
+    
+        return response()->download($path, $fileName);
+    }
+    
+  
+
     //Users
     public function user_photos(){
         //Get categories name

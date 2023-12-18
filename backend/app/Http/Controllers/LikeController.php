@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
+    public function index($slug){
+        $photo = Photo::where("slug", $slug)->first();
+        if(!$photo){
+            return response()->json([
+                "message" => "Photo not found"
+            ], 404);
+        }
+        $like = false;
+        if(Like::where("user_id", auth()->user()->id)->where("photo_id", $photo->id)->first()){
+            $like = true;
+        }
+        return response()->json([
+            "message" => "Get like success",
+            "like" => $like,
+        ]);
+    }
     public function store($slug){
         $photo = Photo::where("slug", $slug)->first();
         if(!$photo){

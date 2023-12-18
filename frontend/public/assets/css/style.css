@@ -35,6 +35,21 @@
     background-color: white;
     top: 0;
 }
+.fade-custom{
+    background: rgba(0,0,0,0.9);
+}
+.close-preview-image{
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: transparent;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.pointer{
+    cursor: pointer;
+}
 
 @media screen and (max-width:470px) {
     p {
