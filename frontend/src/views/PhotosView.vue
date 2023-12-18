@@ -1,4 +1,5 @@
 <template>
+    <NavbarComponent />
     <div class="photos">
 
         <section class="bg-light py-5 py-xl-6">
@@ -85,10 +86,12 @@
 <script>
 import router from "@/router";
 import PhotosComponent from '@/components/PhotosComponent.vue'
+import NavbarComponent from '@/components/NavbarComponent.vue'
 import axios from "axios"
 export default {
     components: {
         PhotosComponent,
+        NavbarComponent,
     },
     data() {
         return {
