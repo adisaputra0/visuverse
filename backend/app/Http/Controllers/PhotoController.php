@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use App\Models\User;
 use App\Models\Photo;
 use App\Models\Comment;
 use App\Models\Category;
@@ -55,6 +56,7 @@ class PhotoController extends Controller
             "message" => "Success get detail photos",
             "photos" => $photo,
             "comments" => $comments,
+            "user" => User::find($photo->user_id),
             "total_likes" => count(Like::where("photo_id", $photo->id)->get()),
             "total_comment" => count($comments),
         ]);

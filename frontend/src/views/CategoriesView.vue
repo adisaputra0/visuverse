@@ -1,5 +1,4 @@
 <template>
-    <NavbarComponent />
     <div class="categories">
         <section class="bg-light py-5 py-xl-6">
             <div class="container my-5 mb-md-6">
@@ -35,11 +34,7 @@
   
 <script>
 import axios from "axios"
-import NavbarComponent from '@/components/NavbarComponent.vue'
 export default {
-    components: {
-        NavbarComponent,
-    },
     data() {
         return {
             categories: [],

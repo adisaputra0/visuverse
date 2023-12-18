@@ -1,5 +1,4 @@
 <template>
-    <NavbarComponent />
     <div class="photos">
 
         <section class="bg-light py-5 py-xl-6">
@@ -9,9 +8,14 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img :src="photos_url + photo.photos.name_image" class="img-fluid rounded-start" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="d-flex gap-2" style="position: absolute; left: 10px; bottom: 10px;" v-if="user && photo.photos.user_id === user.id">
+                                <div class="btn btn-primary">Edit</div>
+                                <div class="btn btn-danger">Delete</div>
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
+                                <p class="text-primary p-0 m-0">@{{ photo.user.username }}</p>
                                 <div class="row gap-3 gap-md-0">
                                     <h5 class="card-title fs-1 col-12 col-md-6 order-2 order-md-1">{{ photo.photos.title }}</h5>
                                     <div class="d-flex justify-content-md-end align-items-center col-12 col-md-6 gap-3 order-1 order-md-2">
@@ -86,12 +90,10 @@
 <script>
 import router from "@/router";
 import PhotosComponent from '@/components/PhotosComponent.vue'
-import NavbarComponent from '@/components/NavbarComponent.vue'
 import axios from "axios"
 export default {
     components: {
         PhotosComponent,
-        NavbarComponent,
     },
     data() {
         return {
