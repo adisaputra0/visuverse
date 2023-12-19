@@ -50,6 +50,21 @@
 .pointer{
     cursor: pointer;
 }
+.position-absolute{
+    position: absolute;
+}
+.left-0{
+    left: 0;
+}
+.opacity-0{
+    opacity: 0%;
+}
+.position-relative{
+    position: relative;
+}
+.fs-10{
+    font-size: 10rem;
+}
 
 @media screen and (max-width:470px) {
     p {
@@ -67,5 +82,11 @@
     .category {
         font-size: 1rem !important;
         padding: 1.3rem 0px !important;
+    }
+    .h-md-30{
+        height: 30vh !important;
+    }
+    .fs-md-5{
+        font-size: 5rem !important;
     }
 }

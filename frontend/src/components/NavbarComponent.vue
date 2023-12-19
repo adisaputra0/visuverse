@@ -16,7 +16,7 @@
               <router-link to="/categories" class="nav-link active">Categories</router-link>
             </li>
             <li class="nav-item" v-if="is_login">
-              <router-link to="/categories" class="nav-link active">Add</router-link>
+              <router-link to="/admin/add" class="nav-link active">Add</router-link>
             </li>
             <li class="nav-item w-100">
               <form class="d-flex" role="search">
