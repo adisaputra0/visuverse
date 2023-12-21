@@ -33,9 +33,8 @@
                                 </div>
                                 <p class="card-text">{{ photo.photos.description }}</p>
                                 <div class="d-flex mb-3">
-                                    <div class="d-flex gap-2 pb-2" style="width: 100%; overflow: auto; height: 50px;"
-                                        v-for="data in photo.photos.category_name">
-                                        <router-link :to="'/category/' + data" class="btn text-white btn-primary pt-2">
+                                    <div class="d-flex gap-2 pb-2" style="width: 100%; overflow: auto; height: 50px;">
+                                        <router-link :to="'/category/' + data" class="btn text-white btn-primary pt-2" v-for="data in photo.photos.category_name">
                                             {{ data }}
                                         </router-link>
                                     </div>

@@ -18,7 +18,15 @@ class CategoryController extends Controller
         }
         $photos = [];
         $categories = [];
-        foreach(Photo::where("categories_id", $category->id)->get() as $photo){
+        $photos_select = [];
+        foreach(Photo::all() as $photo){
+            foreach(explode(",", $photo->categories_id) as $c){
+                if($c == $category->id){
+                    $photos_select[] = $photo;
+                }
+            }
+        }
+        foreach($photos_select as $photo){
             $photos[] = $photo;
             
             $category_photo = explode(",", $photo->categories_id);
@@ -39,6 +47,7 @@ class CategoryController extends Controller
         $categories = Category::orderBy("id", "DESC")->get();
         foreach($categories as $category){
             $photo = Photo::orderBy("created_at", "DESC")->where("categories_id", $category->id)->first();
+
             if($photo){
                 $category->thumbnail = $photo->name_image;
             }else{
