@@ -1,15 +1,11 @@
 <template>
     <section class="bg-light py-5 py-xl-6">
-        <div class="card my-5 mb-md-6 mx-auto container p-0">
-            <form class="row g-0" @submit.prevent="createPhoto" enctype="multipart/form-data">
+        <div class="card my-5 mb-md-6 mx-auto container p-0" v-if="photo">
+            <form class="row g-0" @submit.prevent="updatePhoto" enctype="multipart/form-data">
                 <div class="col-md-4">
-                    <div class="bg-secondary d-flex align-items-center justify-content-center position-relative h-100 h-md-30" id="preview-image">
-                        <div class="position-absolute">
-                            <i class="fa-solid fa-image w-100 left-0 d-flex justify-content-center fs-md-5 fs-10"></i>
-                            <span class="text-danger" v-if="error && error.image"> <br> {{ error.image[0] }}</span>
-                        </div>
+                    <div class="d-flex align-items-center justify-content-center position-relative h-100" id="preview-image">
                         <input class="form-control w-100 h-100 opacity-0 position-absolute left-0" id="formFileLg" type="file" accept="image/*" @input="handleImageUpload">
-                        <img ref="image" class="img-fluid rounded-start d-none w-100 h-100" alt="..." style="object-fit: cover;">
+                        <img ref="image" class="img-fluid rounded-start w-100 h-100" alt="..." style="object-fit: cover;" :src="photos_url + photo.photos.name_image">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -28,7 +24,7 @@
                             <label for="categories" class="form-label">Categories</label>
                             <select class="js-example-basic-multiple" name="states[]" multiple="multiple" id="categories">
                                 <template v-for="category in categories" :key="category.id">
-                                    <option :value="category.id">{{ category.category_name }}</option>
+                                    <option :value="category.id" :selected="data_post.categories_id.includes(category.id.toString())">{{ category.category_name }}</option>
                                 </template>
                             </select>
                             <span class="text-danger" v-if="error && error.categories_id">{{ error.categories_id[0] }}</span>
@@ -54,30 +50,48 @@
                     description: "",
                     categories_id: [],
                 },
+                photo: null,
+                photos_url: localStorage.getItem('photos_url'),
+                slug: this.$route.params.slug,
                 error: null,
             }
         },
-        created() {
+        mounted(){
+            this.fetchDataDetail();
             this.fetchDataCategories();
-        },
-        mounted() {
-            this.initializeSelect2();
         },
         methods: {
             async fetchDataCategories() {
                 try {
                     const response = await axios.get("category");
                     this.categories = response.data.category;
+                    this.initializeSelect2();
                 } catch (error) {
                     console.log(error.response.data.message);
                 }
             },
-            async createPhoto() {
+            async fetchDataDetail() {
+                try {
+                    const response = await axios.get("photos/" + this.slug);
+                    this.photo = response.data;          
+                    this.data_post.title = this.photo.photos.title;
+                    this.data_post.description = this.photo.photos.description;
+                    
+                    let categories = this.photo.photos.categories_id.split(",");
+                    categories.forEach((e) => {
+                        this.data_post.categories_id.push(e);
+                    });
+                    console.log(this.data_post.categories_id);
+                } catch (error) {
+                    console.log(error.response.data.message);
+                }
+            },
+            async updatePhoto() {
                 try {
                     if(Array.isArray(this.data_post.categories_id)){
                         this.data_post.categories_id = this.data_post.categories_id.join(",");
                     }
-                    const response = await axios.post("user/photos", this.data_post);
+                    const response = await axios.post("user/photos/"+this.photo.photos.id, this.data_post);
                     Swal.fire({
                         title: response.statusText,
                         text: response.data.message,
@@ -99,10 +113,6 @@
                     const file = event.target.files[0];
                     imageElement.src = URL.createObjectURL(event.target.files[0]);
                     this.data_post.image = file;
-                    imageElement.classList.remove("d-none");
-                    document.querySelector(".fa-image").classList.add("d-none");
-                    document.querySelector("#preview-image").classList.remove("bg-secondary");
-                    document.querySelector("#preview-image").classList.remove("h-md-30");
                 }
             },
             initializeSelect2() {

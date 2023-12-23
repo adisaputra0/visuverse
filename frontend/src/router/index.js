@@ -5,6 +5,7 @@ import CategoryView from '../views/CategoryView.vue'
 import CategoriesView from '../views/CategoriesView.vue'
 import PhotosView from '../views/PhotosView.vue'
 import CreateView from '../views/CreateView.vue'
+import EditView from '../views/EditView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/admin/add',
     name: 'create',
     component: CreateView
+  },
+  {
+    path: '/admin/edit/:slug',
+    name: 'edit',
+    component: EditView
   },
 ]
 

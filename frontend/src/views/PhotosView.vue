@@ -3,14 +3,14 @@
 
         <section class="bg-light py-5 py-xl-6">
             <!-- Detail -->
-            <template v-if="photo">
+            <template v-if="photo && photo.photos">
                 <div class="card my-5 mb-md-6 mx-auto container p-0">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative">
                             <img :src="photos_url + photo.photos.name_image" class="img-fluid rounded-start" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
                             <div class="d-flex gap-2" style="position: absolute; left: 10px; bottom: 10px;" v-if="user && photo.photos.user_id === user.id">
-                                <div class="btn btn-primary">Edit</div>
-                                <div class="btn btn-danger">Delete</div>
+                                <router-link :to="'/admin/edit/' + photo.photos.slug" class="btn btn-primary">Edit</router-link>
+                                <div class="btn btn-danger" @click="deleteImage(photo.photos.id)">Delete</div>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -139,6 +139,24 @@ export default {
                 const response = await axios.get("photos/" + slug);
                 this.photo = response.data;
             } catch (error) {
+                console.log(error.response.data.message);
+            }
+        },
+        async deleteImage(id) {
+            try {
+                const response = await axios.delete("user/photos/" + id);
+                this.photo = response.data;
+                Swal.fire({
+                    title: response.statusText,
+                    text: response.data.message,
+                    icon: "success"
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: error.response.statusText,
+                    text: error.response.data.message,
+                });
                 console.log(error.response.data.message);
             }
         },
