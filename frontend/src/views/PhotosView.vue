@@ -7,9 +7,12 @@
                 <div class="card my-5 mb-md-6 mx-auto container p-0">
                     <div class="row g-0">
                         <div class="col-md-4 position-relative">
-                            <img :src="photos_url + photo.photos.name_image" class="img-fluid rounded-start" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
-                            <div class="d-flex gap-2" style="position: absolute; left: 10px; bottom: 10px;" v-if="user && photo.photos.user_id === user.id">
-                                <router-link :to="'/admin/edit/' + photo.photos.slug" class="btn btn-primary">Edit</router-link>
+                            <img :src="photos_url + photo.photos.name_image" class="img-fluid rounded-start" alt="..."
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="d-flex gap-2" style="position: absolute; left: 10px; bottom: 10px;"
+                                v-if="user && photo.photos.user_id === user.id">
+                                <router-link :to="'/admin/edit/' + photo.photos.slug"
+                                    class="btn btn-primary">Edit</router-link>
                                 <div class="btn btn-danger" @click="deleteImage(photo.photos.id)">Delete</div>
                             </div>
                         </div>
@@ -17,24 +20,34 @@
                             <div class="card-body">
                                 <p class="text-primary p-0 m-0">@{{ photo.user.username }}</p>
                                 <div class="row gap-3 gap-md-0">
-                                    <h5 class="card-title fs-1 col-12 col-md-6 order-2 order-md-1">{{ photo.photos.title }}</h5>
-                                    <div class="d-flex justify-content-md-end align-items-center col-12 col-md-6 gap-3 order-1 order-md-2">
-                                        <i class="fa-solid fa-download fs-5" @click="downloadPhoto()"></i>
+                                    <h5 class="card-title fs-1 col-12 col-md-6 order-2 order-md-1">{{ photo.photos.title }}
+                                    </h5>
+                                    <div
+                                        class="d-flex justify-content-md-end align-items-center col-12 col-md-6 gap-3 order-1 order-md-2">
+                                        <!-- <i class="fa-solid fa-download fs-5" @click="downloadPhoto()"></i> -->
                                         <!-- <a :href="photos_url + photo.photos.name_image" download><i class="fa-solid fa-download fs-5"></i></a> -->
-                                        <i class="fa-solid fa-eye fs-5" data-bs-toggle="modal" data-bs-target="#preview-image"></i>
+                                        <i class="fa-solid fa-eye fs-5" data-bs-toggle="modal"
+                                            data-bs-target="#preview-image"></i>
 
                                         <template v-if="this.auth">
-                                            <div class="d-flex align-items-center justify-content-center gap-1"><i :class="(isLike? 'fa-solid' : 'fa-regular') + ' fa-heart fs-5 text-danger'" @click="checkLikes()"></i><span class="fs-6 text-danger">{{ photo.total_likes }}</span></div>
+                                            <div class="d-flex align-items-center justify-content-center gap-1"><i
+                                                    :class="(isLike ? 'fa-solid' : 'fa-regular') + ' fa-heart fs-5 text-danger'"
+                                                    @click="checkLikes()"></i><span class="fs-6 text-danger">{{
+                                                        photo.total_likes }}</span></div>
                                         </template>
                                         <template v-else>
-                                            <div class="d-flex align-items-center justify-content-center gap-1"><i class="fa-regular fa-heart fs-5 text-danger" @click="checkLikes()"></i><span class="fs-6 text-danger">{{ photo.total_likes }}</span></div>
+                                            <div class="d-flex align-items-center justify-content-center gap-1"><i
+                                                    class="fa-regular fa-heart fs-5 text-danger"
+                                                    @click="checkLikes()"></i><span class="fs-6 text-danger">{{
+                                                        photo.total_likes }}</span></div>
                                         </template>
                                     </div>
                                 </div>
                                 <p class="card-text">{{ photo.photos.description }}</p>
                                 <div class="d-flex mb-3">
                                     <div class="d-flex gap-2 pb-2" style="width: 100%; overflow: auto; height: 50px;">
-                                        <router-link :to="'/category/' + data" class="btn text-white btn-primary pt-2" v-for="data in photo.photos.category_name">
+                                        <router-link :to="'/category/' + data" class="btn text-white btn-primary pt-2"
+                                            v-for="data in photo.photos.category_name">
                                             {{ data }}
                                         </router-link>
                                     </div>
@@ -43,11 +56,13 @@
                                     <template v-if="photo.total_comment != 0">
                                         <p class="border-bottom pb-2" v-for="data in comments" :key="data.id">
                                             <b>{{ data.user.name }}</b>
-                                            <br>{{ data.comment_text }} 
+                                            <br>{{ data.comment_text }}
                                             <br>
                                             <span v-if="user && data.user_id === user.id">
-                                                <span class="text-primary pointer" @click="editComment(slug, data.id)">edit</span> |
-                                                <span class="text-danger pointer" @click="deleteComment(slug, data.id)">delete</span>    
+                                                <span class="text-primary pointer"
+                                                    @click="editComment(slug, data.id)">edit</span> |
+                                                <span class="text-danger pointer"
+                                                    @click="deleteComment(slug, data.id)">delete</span>
                                             </span>
                                         </p>
                                     </template>
@@ -55,8 +70,10 @@
                                         <p class="text-body-secondary">No Comments</p>
                                     </template>
                                 </div>
-                                <form class="d-flex gap-1 mt-1" @submit.prevent="isEdit ? updateComment(slug, comment_id) : postComment(slug)">
-                                    <input type="text" class="w-100 form-control" placeholder="Comment" v-model="comment_text">
+                                <form class="d-flex gap-1 mt-1"
+                                    @submit.prevent="isEdit ? updateComment(slug, comment_id) : postComment(slug)">
+                                    <input type="text" class="w-100 form-control" placeholder="Comment"
+                                        v-model="comment_text">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                                 <p class="card-text mt-2 ms-1"><small class="text-body-secondary">{{
@@ -67,14 +84,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Modal Preview Image -->
-                <div class="modal fade fade-custom" id="preview-image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade fade-custom" id="preview-image" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body p-1">
                                 <img :src="photos_url + photo.photos.name_image" alt="" width="100%" class="rounded">
-                                <button type="button" class="close-preview-image" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i></button>
+                                <button type="button" class="close-preview-image" data-bs-dismiss="modal"><i
+                                        class="fa-solid fa-x"></i></button>
                             </div>
                         </div>
                     </div>
@@ -111,7 +130,7 @@ export default {
     created() {
         this.fetchDataDetail(this.slug);
         this.getComments(this.slug);
-        if(localStorage.getItem("token")){
+        if (localStorage.getItem("token")) {
             this.auth = true;
             this.getUser();
             this.getLike(this.slug);
@@ -150,6 +169,8 @@ export default {
                     title: response.statusText,
                     text: response.data.message,
                     icon: "success"
+                }).then(() => {
+                    router.push("/admin");
                 });
             } catch (error) {
                 Swal.fire({
@@ -168,10 +189,10 @@ export default {
                 console.log(error.response.data.message);
             }
         },
-        checkLikes(){
-            if(this.isLike){
+        checkLikes() {
+            if (this.isLike) {
                 this.unlike(this.slug);
-            }else{
+            } else {
                 this.like(this.slug);
             }
         },
@@ -209,7 +230,7 @@ export default {
         },
         async postComment(slug) {
             try {
-                const response = await axios.post("photos/" + slug + "/comments", {"comment_text": this.comment_text});
+                const response = await axios.post("photos/" + slug + "/comments", { "comment_text": this.comment_text });
                 window.location.reload();
             } catch (error) {
                 Swal.fire({
@@ -235,7 +256,7 @@ export default {
         },
         async updateComment(slug, id_comment) {
             try {
-                const response = await axios.post("photos/" + slug + "/comments/" + id_comment, {"comment_text": this.comment_text});
+                const response = await axios.post("photos/" + slug + "/comments/" + id_comment, { "comment_text": this.comment_text });
                 window.location.reload();
             } catch (error) {
                 Swal.fire({
@@ -257,27 +278,27 @@ export default {
                 });
             }
         },
-        async downloadPhoto() {
-            try {
-                const response = await axios({
-                    url: this.photos_url + this.photo.photos.name_image + "/download",
-                    method: 'GET',
-                    withCredentials: false,
-                    responseType: 'blob',
-                });
+        // async downloadPhoto() {
+        //     try {
+        //         const response = await axios({
+        //             url: this.photos_url + this.photo.photos.name_image + "/download",
+        //             method: 'GET',
+        //             withCredentials: false,
+        //             responseType: 'blob',
+        //         });
 
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', this.photo.photos.name_image);
-                document.body.appendChild(link);
-                link.click();
+        //         const url = window.URL.createObjectURL(new Blob([response.data]));
+        //         const link = document.createElement('a');
+        //         link.href = url;
+        //         link.setAttribute('download', this.photo.photos.name_image);
+        //         document.body.appendChild(link);
+        //         link.click();
 
-                window.URL.revokeObjectURL(url);
-            } catch (error) {
-                console.error(error);
-            }
-        },
+        //         window.URL.revokeObjectURL(url);
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // },
     },
 }
 </script>

@@ -24,7 +24,6 @@
                             }">
                             {{ data.category_name }}
                         </router-link>
-
                     </div>
                 </div>
             </div>

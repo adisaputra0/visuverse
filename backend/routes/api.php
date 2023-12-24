@@ -30,13 +30,17 @@ Route::post("auth/logout", [AuthController::class, "logout"])->middleware("auth:
 Route::get("auth/profile", [AuthController::class, "profile"])->middleware("auth:sanctum");
 
 //Categories
+//Guests or users
 Route::get("category/{category_name}", [CategoryController::class, "index"]);
 Route::get("category", [CategoryController::class, "all_categories"]);
+//Users
+Route::get("user/category", [CategoryController::class, "user_categories"])->middleware("auth:sanctum");
 Route::post("category", [CategoryController::class, "store"])->middleware("auth:sanctum");
 Route::delete("category/{category_name}", [CategoryController::class, "destroy"])->middleware("auth:sanctum");
 
 //Photo
-//Guest or users
+//Guests or users
+Route::get("search/{search_text}", [PhotoController::class, "search"]);
 Route::get("photos", [PhotoController::class, "index"]);
 Route::get("photos/{slug}", [PhotoController::class, "detail"]);
 Route::get("photos/{slug}/download", [PhotoController::class, "download"]);

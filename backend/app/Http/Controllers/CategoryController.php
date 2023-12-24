@@ -43,10 +43,47 @@ class CategoryController extends Controller
             "photos" => $photos,
         ]);
     }
+    
     public function all_categories(){
         $categories = Category::orderBy("id", "DESC")->get();
         foreach($categories as $category){
             $photo = Photo::orderBy("created_at", "DESC")->where("categories_id", $category->id)->first();
+            if(!$photo){
+                $photos = Photo::orderBy("id", "DESC")->get();
+                foreach($photos as $data_photo){
+                    $categories_id = explode(",", $data_photo->categories_id);
+                    if(array_search($category->id, $categories_id)){
+                        $photo = $data_photo;
+                        break;
+                    }
+                }
+            }
+
+            if($photo){
+                $category->thumbnail = $photo->name_image;
+            }else{
+                $category->thumbnail = null;
+            }
+        }
+        return response()->json([
+            "message" => "Success get all categories",
+            "category" => $categories,
+        ]);
+    }
+    public function user_categories(){
+        $categories = Category::where("user_id", auth()->user()->id)->orderBy("id", "DESC")->get();
+        foreach($categories as $category){
+            $photo = Photo::orderBy("created_at", "DESC")->where("categories_id", $category->id)->first();
+            if(!$photo){
+                $photos = Photo::orderBy("id", "DESC")->get();
+                foreach($photos as $data_photo){
+                    $categories_id = explode(",", $data_photo->categories_id);
+                    if(array_search($category->id, $categories_id)){
+                        $photo = $data_photo;
+                        break;
+                    }
+                }
+            }
 
             if($photo){
                 $category->thumbnail = $photo->name_image;

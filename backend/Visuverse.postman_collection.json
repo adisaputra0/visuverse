@@ -1,0 +1,2444 @@
+{
+	"info": {
+		"_postman_id": "586fef8f-fb3a-4c96-8d5d-c0ffcc14a38e",
+		"name": "Visuverse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28775825"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"item": [
+						{
+							"name": "Register - Success",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Adi\",\r\n    \"username\": \"adisaputra\",\r\n    \"password\": \"pass123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}auth/register",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register - Invalid Field",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/register",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login - Success",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"adisaputra\",\r\n    \"password\" : \"pass123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}auth/login",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login - Wrong username or password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"adisaputra\",\r\n    \"password\" : \"pass12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}auth/login",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login - Invalid Field",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/login",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"item": [
+						{
+							"name": "Logout - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|aQoPktnjUp6SBxY7Rpk5p2WUq0O7Mxppt7tGgmcT38f06654",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/logout",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/logout",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Profile - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/profile",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}auth/profile",
+									"host": [
+										"{{host}}auth"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get Category",
+					"item": [
+						{
+							"name": "Get Category - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/anime",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"anime"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Category - Category Not Found",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/notfound",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"notfound"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All Categories",
+					"item": [
+						{
+							"name": "Get All Categories - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category",
+									"host": [
+										"{{host}}category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get User Categories",
+					"item": [
+						{
+							"name": "Get User Categories - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/category",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Category",
+					"item": [
+						{
+							"name": "Create Category - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "category_name",
+											"value": "Anime",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}category",
+									"host": [
+										"{{host}}category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category - Invalid Field",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{host}}category",
+									"host": [
+										"{{host}}category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{host}}category",
+									"host": [
+										"{{host}}category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"item": [
+						{
+							"name": "Delete Category - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/anime",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"anime"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Category - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/nature",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"nature"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Category - Category Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/notfound",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"notfound"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Category - Category Not Found Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}category/food",
+									"host": [
+										"{{host}}category"
+									],
+									"path": [
+										"food"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Photos",
+			"item": [
+				{
+					"name": "Get Photos",
+					"item": [
+						{
+							"name": "Get Photos - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos",
+									"host": [
+										"{{host}}photos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Search Photos",
+					"item": [
+						{
+							"name": "Get Search Photos - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}search/mob",
+									"host": [
+										"{{host}}search"
+									],
+									"path": [
+										"mob"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Detail Photos",
+					"item": [
+						{
+							"name": "Get Detail Photos - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/65729f9cc5829",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"65729f9cc5829"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Photos - Photo not found",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe00909",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe00909"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Detail Photos - User",
+					"item": [
+						{
+							"name": "Get Detail Photos - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/656de2bca5980",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"656de2bca5980"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Photos - Forbidden",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/656ddffe08fe6",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"656ddffe08fe6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Photos - Photo not found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/656ddffe00909",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"656ddffe00909"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Photos - User",
+					"item": [
+						{
+							"name": "Get Photos - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|5BrS3FHR82fHR8VavRsc7mBGpM1iFQi7ecbiKx9aabe0b7b9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Photos - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}user/photos",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Photos",
+					"item": [
+						{
+							"name": "Create Photos - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Mob Psycho",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/putua/Downloads/Boys Anime.jpg"
+										},
+										{
+											"key": "description",
+											"value": "Mob Psycho Wallpaper",
+											"type": "text"
+										},
+										{
+											"key": "categories_id",
+											"value": "7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}user/photos",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Post - Invalid Field",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Post - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Photos",
+					"item": [
+						{
+							"name": "Update Photos - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|5BrS3FHR82fHR8VavRsc7mBGpM1iFQi7ecbiKx9aabe0b7b9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Linear Architecture",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/putua/Documents/Project Portofolio/visuverse/masonry_masonry-1/masonry-1/assets/img/masonry/masonry-1/img-2.jpg"
+										},
+										{
+											"key": "description",
+											"value": "Linear Architecture Wallpaper",
+											"type": "text"
+										},
+										{
+											"key": "categories_id",
+											"value": "6",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}user/photos/10",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Photos - Forbidden",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Zero new",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "description",
+											"value": "Zero new",
+											"type": "text"
+										},
+										{
+											"key": "categories_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}user/photos/4",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Photos - Photo not found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|5BrS3FHR82fHR8VavRsc7mBGpM1iFQi7ecbiKx9aabe0b7b9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Zero new",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "description",
+											"value": "Zero new",
+											"type": "text"
+										},
+										{
+											"key": "categories_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}user/photos/1",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Photos - Invalid Field",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|5BrS3FHR82fHR8VavRsc7mBGpM1iFQi7ecbiKx9aabe0b7b9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/1",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Photos",
+					"item": [
+						{
+							"name": "Delete Photos - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/7",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Photos - Forbidden",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/4",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Photos - Photo not found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|5BrS3FHR82fHR8VavRsc7mBGpM1iFQi7ecbiKx9aabe0b7b9",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}user/photos/1",
+									"host": [
+										"{{host}}user"
+									],
+									"path": [
+										"photos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Create Comment",
+					"item": [
+						{
+							"name": "Create Comment - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_text",
+											"value": "Beautiful",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Comment - Invalid Field",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Comment - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_text",
+											"value": "Beautiful",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Comment - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Detail Comment",
+					"item": [
+						{
+							"name": "Get Detail Comment - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/6572569f578c4/comments/7",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"6572569f578c4",
+										"comments",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Comment - Forbidden Access",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/2",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Comment - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Detail Comment - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Comments",
+					"item": [
+						{
+							"name": "Get Comments - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/6572569f578c4/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"6572569f578c4",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comments - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/comments",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Comment",
+					"item": [
+						{
+							"name": "Delete Comment - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/3",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comment - Forbidden Access",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/2",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comment - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comment - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Comment",
+					"item": [
+						{
+							"name": "Update Comment - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_text",
+											"value": "Like it!!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment - Invalid Field",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment - Forbidden access",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_text",
+											"value": "Beautiful!!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/2",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment - Photo not found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_text",
+											"value": "Cool!!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment - Invalid Token",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/comments/1",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Likes",
+			"item": [
+				{
+					"name": "Like",
+					"item": [
+						{
+							"name": "Like - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Like - Your Photo Failed",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/6570802442c45/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"6570802442c45",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Like - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Like - Already like this photo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Like - Invalid Token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Like",
+					"item": [
+						{
+							"name": "Get Like - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/6572a00223144/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"6572a00223144",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Like - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Like - Invalid Token",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Unlike",
+					"item": [
+						{
+							"name": "Unlike - Success",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe6/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe6",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlike - Photo Not Found",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|g7HmalIvFUA6VbvMSCffcVlBvlyqOciCHmtPBIss0818079e",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlike - Invalid Token",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}photos/656ddffe08fe/like",
+									"host": [
+										"{{host}}photos"
+									],
+									"path": [
+										"656ddffe08fe",
+										"like"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

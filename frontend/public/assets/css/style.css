@@ -35,10 +35,12 @@
     background-color: white;
     top: 0;
 }
-.fade-custom{
-    background: rgba(0,0,0,0.9);
+
+.fade-custom {
+    background: rgba(0, 0, 0, 0.9);
 }
-.close-preview-image{
+
+.close-preview-image {
     border: 2px solid white;
     border-radius: 10px;
     background-color: transparent;
@@ -47,23 +49,33 @@
     top: 20px;
     right: 20px;
 }
-.pointer{
+
+.pointer {
     cursor: pointer;
 }
-.position-absolute{
+
+.position-absolute {
     position: absolute;
 }
-.left-0{
+
+.left-0 {
     left: 0;
 }
-.opacity-0{
+
+.opacity-0 {
     opacity: 0%;
 }
-.position-relative{
+
+.position-relative {
     position: relative;
 }
-.fs-10{
+
+.fs-10 {
     font-size: 10rem;
+}
+
+.w-90 {
+    width: 90%;
 }
 
 @media screen and (max-width:470px) {
@@ -83,10 +95,12 @@
         font-size: 1rem !important;
         padding: 1.3rem 0px !important;
     }
-    .h-md-30{
+
+    .h-md-30 {
         height: 30vh !important;
     }
-    .fs-md-5{
+
+    .fs-md-5 {
         font-size: 5rem !important;
     }
 }

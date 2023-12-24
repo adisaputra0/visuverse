@@ -6,6 +6,7 @@ import CategoriesView from '../views/CategoriesView.vue'
 import PhotosView from '../views/PhotosView.vue'
 import CreateView from '../views/CreateView.vue'
 import EditView from '../views/EditView.vue'
+import SearchView from '../views/SearchView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/admin/edit/:slug',
     name: 'edit',
     component: EditView
+  },
+  {
+    path: '/search/:search_text',
+    name: 'search',
+    component: SearchView
   },
 ]
 

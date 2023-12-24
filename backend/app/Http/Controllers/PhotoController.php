@@ -14,6 +14,28 @@ use Illuminate\Support\Facades\Validator;
 class PhotoController extends Controller
 {
     //Guest or users
+    public function search($search_text){
+        //Get categories name
+        $all_photos = Photo::where("title", 'like', '%' . $search_text . '%')->get();
+
+        $categories = [];
+        foreach($all_photos as $item_photo){
+            $category_photo = explode(",", $item_photo->categories_id);
+            foreach($category_photo as $item_category){
+                $category = Category::find($item_category);
+                $categories[] = $category->category_name;
+            }
+            $item_photo->category_name = $categories;
+            $categories = [];
+        }
+
+        return response()->json([
+            "message" => "Success get photos",
+            "photos" => $all_photos,
+            "total_photos" => count($all_photos),
+        ]);
+    }
+
     public function index(){
         
         //Get categories name
@@ -62,27 +84,27 @@ class PhotoController extends Controller
         ]);
     }
 
-    public function download($slug)
-    {
-        $photo = Photo::where("slug", $slug)->first();
-        if (!$photo) {
-            return response()->json([
-                "message" => "Photo not found",
-            ], 404);
-        }
+    // public function download($slug)
+    // {
+    //     $photo = Photo::where("slug", $slug)->first();
+    //     if (!$photo) {
+    //         return response()->json([
+    //             "message" => "Photo not found",
+    //         ], 404);
+    //     }
     
-        $path = public_path("photos/") . $photo->name_image;
+    //     $path = public_path("photos/") . $photo->name_image;
     
-        if (!file_exists($path)) {
-            return response()->json([
-                "message" => "Photo not found",
-            ], 404);
-        }
+    //     if (!file_exists($path)) {
+    //         return response()->json([
+    //             "message" => "Photo not found",
+    //         ], 404);
+    //     }
     
-        $fileName = $photo->name_image;
+    //     $fileName = $photo->name_image;
     
-        return response()->download($path, $fileName);
-    }
+    //     return response()->download($path, $fileName);
+    // }
     
   
 
@@ -98,6 +120,7 @@ class PhotoController extends Controller
                 $categories[] = $category->category_name;
             }
             $item_photo->category_name = $categories;
+            $categories = [];
         }
 
         return response()->json([
